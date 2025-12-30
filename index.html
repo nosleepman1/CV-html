@@ -3,17 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Moderne</title>
+    <title>CV - Abdallah DIOUF</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="app.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+        
+        @media print {
+            body { background: white !important; }
+            .no-print { display: none !important; }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .tech-item {
+            display: inline-block;
+            position: relative;
+            padding-left: 12px;
+            margin-bottom: 8px;
+        }
+
+        .tech-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #8b5cf6;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen py-8 px-4">
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-6xl mx-auto" id="cv-content">
         <!-- Header Section -->
         <header class="bg-white rounded-2xl shadow-xl p-8 mb-6 fade-in card-hover">
             <div class="flex flex-col md:flex-row items-center gap-6">
                 <div class="w-32 h-32 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-                    JD
+                    AD
                 </div>
                 <div class="flex-1 text-center md:text-left">
                     <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-2">Abdallah DIOUF</h1>
@@ -54,14 +109,39 @@
                     </p>
                 </section>
 
-                <!-- Compétences -->
+                <!-- Compétences Techniques -->
                 <section class="bg-white rounded-2xl shadow-xl p-6 slide-in card-hover" style="animation-delay: 0.1s">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-500 pb-2">Compétences</h2>
-                    <div id="competences-container" class="space-y-4"></div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-500 pb-2">Compétences Techniques</h2>
+                    
+                    <!-- Frontend -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-bold text-purple-600 mb-2 uppercase tracking-wide">Frontend</h3>
+                        <div id="frontend-container" class="text-gray-700 text-sm leading-relaxed"></div>
+                    </div>
+
+                    <!-- Backend -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-bold text-indigo-600 mb-2 uppercase tracking-wide">Backend</h3>
+                        <div id="backend-container" class="text-gray-700 text-sm leading-relaxed"></div>
+                    </div>
+
+                    <!-- DevOps -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-bold text-blue-600 mb-2 uppercase tracking-wide">DevOps</h3>
+                        <div id="devops-container" class="text-gray-700 text-sm leading-relaxed"></div>
+                    </div>
+
+                    <!-- Outils -->
+                    <div>
+                        <h3 class="text-sm font-bold text-green-600 mb-2 uppercase tracking-wide">Outils</h3>
+                        <div id="outils-container" class="text-gray-700 text-sm leading-relaxed"></div>
+                    </div>
                 </section>
 
+                <!-- Langages de Programmation -->
+
                 <!-- Langues -->
-                <section class="bg-white rounded-2xl shadow-xl p-6 slide-in card-hover" style="animation-delay: 0.2s">
+                <section class="bg-white rounded-2xl shadow-xl p-6 slide-in card-hover" style="animation-delay: 0.3s">
                     <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-500 pb-2">Langues</h2>
                     <ul id="langues-container" class="space-y-3"></ul>
                 </section>
@@ -70,34 +150,226 @@
             <!-- Right Column -->
             <div class="md:col-span-2 space-y-6">
                 <!-- Expérience -->
-                <section class="bg-white rounded-2xl shadow-xl p-6 fade-in card-hover" style="animation-delay: 0.3s">
+                <section class="bg-white rounded-2xl shadow-xl p-6 fade-in card-hover" style="animation-delay: 0.4s">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-purple-500 pb-2">Expérience Professionnelle</h2>
                     <div id="experiences-container" class="space-y-6"></div>
                 </section>
 
                 <!-- Formation -->
-                <section class="bg-white rounded-2xl shadow-xl p-6 fade-in card-hover" style="animation-delay: 0.4s">
+                <section class="bg-white rounded-2xl shadow-xl p-6 fade-in card-hover" style="animation-delay: 0.5s">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-purple-500 pb-2">Formation</h2>
                     <div id="formations-container" class="space-y-4"></div>
                 </section>
 
                 <!-- Projets -->
-                <section class="bg-white rounded-2xl shadow-xl p-6 fade-in card-hover" style="animation-delay: 0.5s">
+                <section class="bg-white rounded-2xl shadow-xl p-6 fade-in card-hover" style="animation-delay: 0.6s">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-purple-500 pb-2">Projets Remarquables</h2>
                     <div id="projets-container" class="grid sm:grid-cols-2 gap-4"></div>
                 </section>
             </div>
         </div>
 
-        <!-- Bouton d'impression -->
+        <!-- Bouton de téléchargement -->
         <div class="mt-6 text-center no-print">
-            <button onclick="window.print()" class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                Télécharger en PDF
+            <button id="download-btn" class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                <span id="btn-text">Télécharger en PDF</span>
+                <span id="btn-loading" class="hidden">Génération en cours...</span>
             </button>
         </div>
     </div>
 
-    <script src="/app.js">
+    <script>
+        const cvData = {
+            frontend: ["React", "React Native", "HTML5", "CSS3", "Tailwind CSS"],
+            backend: ["Laravel", "Express.js", "NestJS", "Node.js"],
+            devops: ["GitHub Actions", "Docker", "Jenkins", "CI/CD"],
+            outils: ["Git", "GitHub", "VS Code", "Postman", "npm/yarn"],
+            langues: [
+                { nom: "Français", niveau: "Natif", color: "purple" },
+                { nom: "Anglais", niveau: "Courant", color: "indigo" },
+                { nom: "Espagnol", niveau: "Basique", color: "blue" }
+            ],
+            experiences: [
+                {
+                    titre: "Lead Developer",
+                    entreprise: "Ambo Tech",
+                    periode: "2025 - Présent",
+                    taches: [
+                        "Direction d'une équipe de 2 développeurs",
+                        "Architecture et développement d'applications React/Node.js",
+                        "Mise en place de CI/CD et bonnes pratiques DevOps"
+                    ],
+                    color: "purple"
+                },
+                {
+                    titre: "Développeur Full Stack",
+                    entreprise: "Freelance",
+                    periode: "2024 - Présent",
+                    taches: [
+                        "Développement d'applications web sur mesure",
+                        "Intégration d'APIs RESTful et GraphQL",
+                        "Optimisation des performances et SEO"
+                    ],
+                    color: "indigo"
+                }
+            ],
+            formations: [
+                {
+                    diplome: "Licence Génie Logiciel",
+                    etablissement: "Institut Supérieur d'Informatique",
+                    periode: "2024 - présent",
+                    icon: "M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z",
+                    gradient: "from-purple-500 to-indigo-600"
+                },
+                {
+                    diplome: "Licence Robotique",
+                    etablissement: "ATOS, Université Numérique du Sénégal",
+                    periode: "2022 - 2025",
+                    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+                    gradient: "from-indigo-500 to-purple-600"
+                },
+                {
+                    diplome: "Baccalauréat S5",
+                    etablissement: "Lycée Technique de Thiès",
+                    periode: "Juillet 2022",
+                    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+                    gradient: "from-indigo-500 to-purple-600"
+                }
+            ],
+            projets: [
+                {
+                    titre: "Plateforme musée (MCN Sénégal)",
+                    description: "Plateforme complète musée des civilisations noires, avec boutique intégrée, achat tickets + gestions des flux, room tour virtuel et découverte des œuvres à distance avec descriptions textuelles et audio des œuvres",
+                    technologies: ["React", "Node.js", "Express", "JWT", "Redux", "MongoDB", "Mongoose"],
+                    gradient: "from-purple-50 to-indigo-50",
+                    border: "border-purple-200"
+                },
+                {
+                    titre: "Système d'authentification",
+                    description: "API REST d'un système d'authentification pour architecture microservices",
+                    technologies: ["Node.js", "Express", "Joi", "JWT", "Passport", "MongoDB", "Mongoose"],
+                    gradient: "from-indigo-50 to-purple-50",
+                    border: "border-indigo-200"
+                }
+            ]
+        };
+
+        // Fonction pour créer une liste inline avec des puces
+        function createInlineList(items) {
+            return items.map((item, index) => 
+                `<span class="block tech-item">${item}</span>${index < items.length - 1 ? ' ' : ''}`
+            ).join('');
+        }
+
+        // Rendu des compétences techniques
+        function renderCompetences() {
+            document.getElementById('frontend-container').innerHTML = createInlineList(cvData.frontend);
+            document.getElementById('backend-container').innerHTML = createInlineList(cvData.backend);
+            document.getElementById('devops-container').innerHTML = createInlineList(cvData.devops);
+            document.getElementById('outils-container').innerHTML = createInlineList(cvData.outils);
+        }
+
+
+
+        // Rendu des langues
+        function renderLangues() {
+            const container = document.getElementById('langues-container');
+            container.innerHTML = cvData.langues.map(langue => `
+                <li class="flex justify-between items-center">
+                    <span class="text-gray-700 font-medium">${langue.nom}</span>
+                    <span class="text-sm bg-${langue.color}-100 text-${langue.color}-700 px-3 py-1 rounded-full">${langue.niveau}</span>
+                </li>
+            `).join('');
+        }
+
+        // Rendu des expériences
+        function renderExperiences() {
+            const container = document.getElementById('experiences-container');
+            container.innerHTML = cvData.experiences.map(exp => `
+                <div class="relative pl-8 border-l-2 border-purple-300">
+                    <div class="absolute -left-2 top-0 w-4 h-4 bg-${exp.color}-500 rounded-full"></div>
+                    <h3 class="text-xl font-bold text-gray-800">${exp.titre}</h3>
+                    <p class="text-purple-600 font-medium">${exp.entreprise}</p>
+                    <p class="text-sm text-gray-500 mb-2">${exp.periode}</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        ${exp.taches.map(tache => `<li>${tache}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        // Rendu des formations
+        function renderFormations() {
+            const container = document.getElementById('formations-container');
+            container.innerHTML = cvData.formations.map(formation => `
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br ${formation.gradient} rounded-lg flex items-center justify-center text-white flex-shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="${formation.icon}"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">${formation.diplome}</h3>
+                        <p class="text-purple-600">${formation.etablissement}</p>
+                        <p class="text-sm text-gray-500">${formation.periode}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Rendu des projets
+        function renderProjets() {
+            const container = document.getElementById('projets-container');
+            container.innerHTML = cvData.projets.map(projet => `
+                <div class="bg-gradient-to-br ${projet.gradient} p-4 rounded-xl border ${projet.border} card-hover">
+                    <h3 class="font-bold text-gray-800 mb-2">${projet.titre}</h3>
+                    <p class="text-sm text-gray-600 mb-3">${projet.description}</p>
+                    <div class="flex flex-wrap gap-2">
+                        ${projet.technologies.map((tech, index) => {
+                            const color = index % 2 === 0 ? 'purple' : 'indigo';
+                            return `<span class="text-xs bg-${color}-200 text-${color}-700 px-2 py-1 rounded">${tech}</span>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Fonction de téléchargement PDF
+        function downloadPDF() {
+            const button = document.getElementById('download-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoading = document.getElementById('btn-loading');
+            
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+            button.disabled = true;
+
+            const element = document.getElementById('cv-content');
+            const opt = {
+                margin: 10,
+                filename: 'CV_Abdallah_DIOUF.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+                button.disabled = false;
+            });
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCompetences();
+            renderLangues();
+            renderExperiences();
+            renderFormations();
+            renderProjets();
+
+            document.getElementById('download-btn').addEventListener('click', downloadPDF);
+        });
     </script>
 </body>
 </html>
