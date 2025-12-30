@@ -163,8 +163,8 @@
 
                 <!-- Projets -->
                 <section class="bg-white rounded-2xl shadow-xl p-6 fade-in card-hover" style="animation-delay: 0.6s">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-purple-500 pb-2">Projets Remarquables</h2>
-                    <div id="projets-container" class="grid sm:grid-cols-2 gap-4"></div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-purple-500 pb-2">Liens </h2>
+                    <div id="Liens" class="grid sm:grid-cols-2 gap-4"></div>
                 </section>
             </div>
         </div>
@@ -236,21 +236,12 @@
                     gradient: "from-indigo-500 to-purple-600"
                 }
             ],
-            projets: [
+            liens: [
                 {
-                    titre: "Plateforme musée (MCN Sénégal)",
-                    description: "Plateforme complète musée des civilisations noires, avec boutique intégrée, achat tickets + gestions des flux, room tour virtuel et découverte des œuvres à distance avec descriptions textuelles et audio des œuvres",
-                    technologies: ["React", "Node.js", "Express", "JWT", "Redux", "MongoDB", "Mongoose"],
-                    gradient: "from-purple-50 to-indigo-50",
-                    border: "border-purple-200"
+                    titre : 'github',
+                    lien : 'https://github.com/nosleepman1'
                 },
-                {
-                    titre: "Système d'authentification",
-                    description: "API REST d'un système d'authentification pour architecture microservices",
-                    technologies: ["Node.js", "Express", "Joi", "JWT", "Passport", "MongoDB", "Mongoose"],
-                    gradient: "from-indigo-50 to-purple-50",
-                    border: "border-indigo-200"
-                }
+                
             ]
         };
 
@@ -317,20 +308,11 @@
             `).join('');
         }
 
-        // Rendu des projets
-        function renderProjets() {
-            const container = document.getElementById('projets-container');
-            container.innerHTML = cvData.projets.map(projet => `
-                <div class="bg-gradient-to-br ${projet.gradient} p-4 rounded-xl border ${projet.border} card-hover">
-                    <h3 class="font-bold text-gray-800 mb-2">${projet.titre}</h3>
-                    <p class="text-sm text-gray-600 mb-3">${projet.description}</p>
-                    <div class="flex flex-wrap gap-2">
-                        ${projet.technologies.map((tech, index) => {
-                            const color = index % 2 === 0 ? 'purple' : 'indigo';
-                            return `<span class="text-xs bg-${color}-200 text-${color}-700 px-2 py-1 rounded">${tech}</span>`;
-                        }).join('')}
-                    </div>
-                </div>
+        // Rendu des liens
+        function renderLinks() {
+            const container = document.getElementById('Liens');
+            container.innerHTML = cvData.liens.map(lien => `
+                <a class="inline-flex items-center justify-center w-full h-10 mr-2 text-white transition-colors duration-150 bg-blue-600 rounded-xl focus:shadow-outline hover:bg-blue-700" href=${lien.lien}> ${lien.titre} </a>
             `).join('');
         }
 
@@ -366,8 +348,7 @@
             renderLangues();
             renderExperiences();
             renderFormations();
-            renderProjets();
-
+            renderLinks();
             document.getElementById('download-btn').addEventListener('click', downloadPDF);
         });
     </script>
